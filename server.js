@@ -5,7 +5,7 @@ const server=http.createServer(async(req,res)=>{
  try{
   if(url.pathname==='/'||url.pathname==='/health')value={ok:true,service:'rest',release:2};
   else if(url.pathname==='/products')value={products};
-  else if(url.pathname==='/large'){const n=Math.min(1100000,Math.max(0,Number(url.searchParams.get('size')||131072)));value={bytes:n,payload:'x'.repeat(n)}};
+  else if(url.pathname==='/large'){const n=Math.min(1100000,Math.max(0,Number(url.searchParams.get('size')||131072)));value={bytes:n,payload:'x'.repeat(n)}}
   else if(url.pathname==='/headers')value={cookieBytes:(req.headers.cookie||'').length,probeBytes:(req.headers['x-probe']||'').length};
   else if(url.pathname==='/slow'){await new Promise(r=>setTimeout(r,1500));value={ok:true,waitMs:1500};}
   else if(url.pathname==='/fail'){status=500;value={error:'intentional test failure'};}
